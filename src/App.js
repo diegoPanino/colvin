@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import './css/app.css';
+import homework from './img/homework.png'
 
-function App() {
+function App(props){
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div>
+      <header className='header'>
+        <img className='headerImg' src={homework} alt="Homework" />
+        <h1 className='headerTitle'>Doing homework</h1>
       </header>
-    </div>
-  );
-}
+      <div className='content'>
+        <div className='form'>
+          <h5 className='inputLabel'>Git user:</h5>
+          <input className='input' type="text" />
+          <button className='searchBtn' onClick={()=>console.log('click')}>Search</button>
+        </div>
 
+      </div>
+    </div>
+    )
+}
 export default App;

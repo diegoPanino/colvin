@@ -1,0 +1,12 @@
+.loader{
+	border:1em solid #4078c0;
+	border-top-color: #333;
+	border-radius: 50%;
+	width:5em;
+	height: 5em;
+	animation:spin 2s linear infinite;
+}
+@keyframes spin{
+	0% {transform: rotate(0deg);}
+	100% {transform: rotate(360deg);}
+}

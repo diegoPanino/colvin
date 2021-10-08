@@ -1,0 +1,38 @@
+.form{
+	background-color: rgb(33, 37, 43);
+	border-radius: 20px;
+	padding:1em;
+	display:flex;
+	flex-grow: 0.3;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.inputLabel{
+	font-size: 2em;
+	margin:15px;
+}
+.errMsg{
+	margin-top: 2px;
+	color: red;
+}
+.input{
+	background-color: rgb(27, 29, 35);
+	font: 2em "Courier New", Courier, monospace;
+	color:#fafafa;
+	border:1px solid rgb(27,29,35);
+	border-radius: 20px;
+	padding:10px;
+}
+.input:hover{
+	border:1px solid #fafafa;
+	background: linear-gradient(100deg, #0a0a0a, #1B1D23 20% 80%,#0a0a0a);
+}
+.input:active{
+	border:1px solid #fafafa;
+	background:#0a0a0a;
+}
+.input:focus{
+	border:1px solid #fafafa;
+	background:#0a0a0a;
+}

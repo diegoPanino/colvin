@@ -1,0 +1,22 @@
+.searchBtn{
+	font: 1.5em "Courier New", Courier, monospace;
+	color:#fafafa;
+	background-color: #4078c0;
+	border:1px solid #4078c0;
+	margin:1em;
+	padding:0.5em 2em 0.5em 2em;
+	border-radius: 20px;
+}
+.searchBtn:hover{
+	background-color: #4078c0;
+	background: linear-gradient(100deg, #203B60, #4078c0 20% 80%,#203B60 );
+	border:1px solid white;
+}
+.searchBtn:active{
+	border:1px solid white;
+	background:#203B60;
+}
+.searchBtn:disabled{
+	border:1px solid #4078c0;
+	background:gray;	
+}

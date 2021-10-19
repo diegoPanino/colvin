@@ -36,7 +36,7 @@ export default function SearchInput(props){
 			<div className='inputWrapper'>
 				<input 	className='input' type="text" name="search" value={input}
 						onChange={onChangeHandler} onFocus={onFocusHandler} onKeyPress={onKeyPressHandler}
-						maxLength='39' autoComplete='off'/>
+						maxLength='39'/>
 			</div>
 			{err && <span className='errMsg'>Username not valid!!</span>}
 			<Button btnClick = {onSubmitHandler} disabled={err}>{buttonText}</Button>

@@ -21,13 +21,13 @@ function App(props){
 
   const inputHandler =  async input =>{
     setLoading(true)
-    const usersFollowback = await api.requestFollowing(input)
+    const usersFollowback = await api.requestApi(input)
     console.log('App.js->',usersFollowback)
-    setFollowBack({
+    /*setFollowBack({
       userName:input,
       count:usersFollowback.length,
       userNames:usersFollowback
-    })
+    })*/
   }
 
   return (

@@ -8,7 +8,7 @@ export default function FollowbackContainer(props){
 		<div className='followBackContainer'>
 			<span>Total followBack: {followBack.count}</span>
 			{followBack.userNames.map((user,id) => {
-				return <UserCard user = {user} key={user.name+id} />
+				return <UserCard user = {user} key={user.name} />
 			})}
 		</div>
 		)

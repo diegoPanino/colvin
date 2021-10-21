@@ -1,4 +1,115 @@
 import {request} from '@octokit/request'
+// eslint-disable-next-line
+import fakeUsers from './fakeUsernames.js'
+
+/*export async function requestApi(userName){
+	let following = []
+	let followBack = []
+	let promises = []
+	let totPage = 1, page = 1
+	let followingPromises = []
+	let followBackPromises = []
+	try{
+		const response = await getFollowing(userName,page)
+		totPage = response.headers.hasOwnProperty('link') ? getTotalPages(response.headers.link) : 1
+		following = response.data.map(user=> {return {user:user.login,pic:user.avatar_url}})
+		while(page<totPage){
+			page++
+			followingPromises.push(getFollowing(userName,page))
+		}
+		const followPromiseResult = await Promise.allSettled(followingPromises)
+		followPromiseResult.map(promise=>{
+			return promise.value.data.map(user=>{following.push({user:user.login,pic:user.avatar_url}) })})
+		followBackPromises = following.map(user => {return getFollowBack(user.user,userName,false)})
+		const followBackPromisesResult = await Promise.allSettled(followBackPromises)
+		followBack = following.filter((user,i) => {
+			return followBackPromisesResult[i].value.status === 204
+		})
+		return followBack
+	}
+	catch(err){
+		console.log(err)
+		switch(err.status){
+			case 404 : return {err:err,status:err.status,msg:'User not found'}
+			default : return {err:err,status:err.status,msg:'Something went wrong'}
+		}
+
+	}
+}*/
+
+
+function getFollowing(user,page){
+	return request('GET /users/{username}/following',{
+		username:user,
+		per_page:80,
+		page:page
+	})
+}
+function getFollowBack(requestString,target_user,realReq){
+	switch(realReq){
+		case true:
+			return request(requestString,{target_user:target_user})
+		case false:
+			return fetch('http://localhost:3001/',{
+				method:'post',
+				headers:{'Content-Type': 'application/json'},
+				body: JSON.stringify({user:requestString})
+			})
+		default: return false
+	}
+}
+//getTotalPages receive link from the response's header, and look for rel=last and retreive tot number of page for that response
+//before split by ',' and use the second result because is where the link with rel=last will be
+//then it's look for &page[0-9]+> where it fill find the total number of page for the fetched info
+function getTotalPages(link){
+	const linksArray = link.split(',')
+	const linkNums = linksArray[1].match(/&page=\d*>/g).toString().match(/(\d)+/)
+	return linkNums[0]
+}
+
+
+/********************************************************2nd attempt*********************************************************************/
+export async function requestApi(userName){
+	let following = []
+	let promises = []
+	let totPage = 1, page = 0
+	try{
+		while(page < totPage){
+			page++
+			const response = await getFollowing(userName,page)
+			if(page === 1)
+				totPage = response.headers.hasOwnProperty('link') ? getTotalPages(response.headers.link) : 1
+			const promisesArray = response.data.map(user => {
+				following.push({user:user.login,pic:user.avatar_url})
+				return getFollowBack(user.login,userName,false)
+				})	
+			promises.push(...promisesArray)
+			}
+		const followBackResult = await Promise.allSettled(promises)
+		const followBack = following.filter((user,i) => {
+			return followBackResult[i].value.status === 204
+		})
+	return followBack
+	}
+	
+	catch(err){
+		console.log(err)
+		switch(err.status){
+			case 404 : return {err:err,status:err.status,msg:'User not found'}
+			default : return {err:err,status:err.status,msg:'Something went wrong'}
+		}
+
+	}
+}
+
+
+
+
+
+
+/***************************************1st attempt**********************************************************************************/
+/*
+aimport {request} from '@octokit/request'
 import fakeUsers from './fakeUsernames.js'
 //requestFollowing use GitHub api, and request the user's following.
 //it will do the first request and get the first batch of users.
@@ -67,14 +178,14 @@ async function requestFollowBack(users,target_user){
 			target_user:target_user,									
 			accept:'application/vnd.github.v3+json'						
 			})
-*/
-//*/FAKE API
+
+/FAKE API
 		return fetch('http://localhost:3001/',{
 			method: 'post',
 			headers:{'Content-Type': 'application/json'},
 			body: JSON.stringify({user:user.login})
 			})
-//*/
+//
 		.then(response => { 
 			console.log('response=>',response)
 			if(response.status === 204)
@@ -113,44 +224,5 @@ function reducePromise(data){
 			result.push(item.value)
 		return result.flat()
 	},[])
-}
-
-
-
-
-
-
-
-
-
-
-/*
-async function requestFollowBack(users,target_user){
-	return Promise.allSettled(users.map(user => {
-		return request('GET /users/{username}/following/{target_user}',{
-			username:user.login,
-			target_user:target_user,
-			accept:'application/vnd.github.v3+json'
-		}).then(response => { 
-			if(response.status === 204){
-				return {name:user.login,pic:user.avatar_url}
-			}
-		})
-	}))
-	.then(responses => {
-		const values = responses.reduce((result,response)=> {
-			if(response.status === 'fulfilled')
-				result.push(response.value)
-			return result
-		},[])
-		console.log('values',values)
-		return values
-	})
-	.catch(err => {
-		if(err.status === 403)
-			return fakeUsers(target_user)
-		else
-			return 0
-	})
 }
 */

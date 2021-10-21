@@ -22,14 +22,14 @@ app.post('/',(req,res)=>{
 		for(let i = 0; i < user.length;i++)
 			count = user.charCodeAt(i) + count
 		if(count % 3 === 0)
-			res.status(204).json('No content')
+			res.status(204).send('No content')
 		else
-			res.status(404).json('Not found')
+			res.status(404).send('Not found')
 		
 	}
 	catch(err){
 		console.log(err)
-		res.status(404).json('Not found')
+		res.status(404).send('Not found')
 	}
 	
 })

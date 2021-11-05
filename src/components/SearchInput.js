@@ -11,7 +11,7 @@ export default function SearchInput(props){
 		const {value} = e.target
 		//username allowed are only alphanumeric and not consecutive hypens, nor starting or ending with hypens
 		const doubleHypen = value.search(/[^\w-]|(-)\1/) === -1 ? false : true //check alphanumeric and consecutive hypen
-		if(value[0] === '-' || value[value.length-1] === '-' || !value.length || doubleHypen)
+		if(value[0] === '-' || value[value.length-1] === '-' || doubleHypen)
 			setErr(true)
 		else
 			setErr(false)
@@ -33,11 +33,9 @@ export default function SearchInput(props){
 	return(
 		<div className='form'>
 		 	<h5 className='inputLabel'>{label}</h5>
-			<div className='inputWrapper'>
-				<input 	className='input' type="text" name="search" value={input}
+			<input 	className='input' type="search" name="search" value={input}
 						onChange={onChangeHandler} onFocus={onFocusHandler} onKeyPress={onKeyPressHandler}
-						maxLength='39'/>
-			</div>
+						maxLength='39'autoComplete='off' />
 			{err && <span className='errMsg'>Username not valid!!</span>}
 			<Button btnClick = {onSubmitHandler} disabled={err}>{buttonText}</Button>
 		</div>

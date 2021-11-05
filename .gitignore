@@ -13,6 +13,7 @@
 
 # misc
 /src/token
+/src/components/attempts.js
 .DS_Store
 .env.local
 .env.development.local

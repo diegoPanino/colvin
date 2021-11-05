@@ -1,15 +1,15 @@
 .card{
 	margin:10px;
+	-webkit-box-shadow: 3px 7px 15px 5px #000000; 
+	box-shadow: 3px 7px 5px 5px rgb(53, 17, 43);
+	border-radius: 10px;
+	
 }
-.imgContainer{
-
+.card:hover{
+	transform: scale(1.1);
 }
 .img{
 	width: 10em;
-}
-.userContainer{
-
-}
-.username{
-	
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
 }

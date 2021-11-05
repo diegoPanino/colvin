@@ -1,0 +1,12 @@
+.ToTopBtnContainer{
+	position:fixed;
+	bottom:0.2em;
+	right: 0.7em;
+	font-size: 4em;
+	color:#4078c0;
+	cursor: pointer;
+}
+.ToTopBtnContainer:active{
+	border-radius: 50%;
+	background:#203B60;
+}

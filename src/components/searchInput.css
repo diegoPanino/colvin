@@ -9,7 +9,7 @@
 	align-items: center;
 }
 .inputLabel{
-	font-size: 2em;
+	font-size: 4vw;
 	margin:15px;
 }
 .errMsg{
@@ -18,11 +18,13 @@
 }
 .input{
 	background-color: rgb(27, 29, 35);
-	font: 2em "Courier New", Courier, monospace;
+	display:flex;
+	font: 3vw "Courier New", Courier, monospace;
 	color:#fafafa;
 	border:1px solid rgb(27,29,35);
 	border-radius: 20px;
 	padding:10px;
+	margin: 5px;
 }
 .input:hover{
 	border:1px solid #fafafa;

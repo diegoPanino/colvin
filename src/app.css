@@ -13,11 +13,11 @@ body{
 	align-items: center;
 }
 .headerImg{
-	width: 10em; 
+	width: 10vw; 
 	margin: 1%;
 }
 .headerTitle{
-	font-size:3em;
+	font-size:5vw;
 	border-width: 1px;
 	flex: 1 content;
 	margin-left: 1em;
@@ -27,6 +27,9 @@ body{
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin:1em;
-	padding:1em;
+	margin:1vw;
+	padding:1vw;
+}
+.errMsg{
+	font-size: 2vw
 }
